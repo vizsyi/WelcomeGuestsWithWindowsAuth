@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WelcomeScreen.Models.WelcomeGuestVisitHist>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/WS_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VisitHist.Visit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Guest.Fullname)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var gvh in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => gvh.VisitHist.Visit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => gvh.Guest.Fullname)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = gvh.GV_ID })
+            </td>
+        </tr>
+    }
+
+</table>

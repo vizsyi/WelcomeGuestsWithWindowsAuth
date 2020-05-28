@@ -1,0 +1,80 @@
+﻿@model IEnumerable<WelcomeScreen.Models.IntraRole>
+
+@{
+    ViewBag.Title = "Felhasználói csoportok";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a href='@Url.Action("Create")' class="btn btn-default">
+        <img src="~/Images/new.png" height="21" /> Új felhasználói csoport &raquo;
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Admin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomePage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsefullLimks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WelcomeScreen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T2reTool)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Admin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomePage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsefullLimks)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WelcomeScreen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.T2reTool)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Role_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Role_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Role_ID })*@
+                <a href='@Url.Action("Edit", new { id = item.Role_ID })'>
+                    <img src='~/Images/edit.png' height="21" title="Szerkesztés"
+                         onmouseover='this.src="/Images/edit_aq.png"' onmouseout="this.src='/Images/edit.png'" />
+                </a>
+                <span> | </span>
+                <a href='@Url.Action("Details", new { id = item.Role_ID })'>
+                    <img src='~/Images/details.png' height="21" title="Részletek"
+                         onmouseover='this.src="/Images/details_aq.png"' onmouseout="this.src='/Images/details.png'" />
+                </a>
+                <span> | </span>
+                <a href='@Url.Action("Delete", new { id = item.Role_ID })'>
+                    <img src='~/Images/delete.png' height="21" title="Törlés"
+                         onmouseover='this.src="/Images/delete_aq.png"' onmouseout="this.src='/Images/delete.png'" />
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

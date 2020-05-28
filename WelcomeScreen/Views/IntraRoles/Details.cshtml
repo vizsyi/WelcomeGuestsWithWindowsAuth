@@ -1,0 +1,111 @@
+﻿@model WelcomeScreen.Models.IntraRole
+
+@{
+    ViewBag.Title = "Felhasználói csoport adatai";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomePage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomePage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsefullLimks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsefullLimks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WS_ViewVisit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WS_ViewVisit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WS_CreateVisit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WS_CreateVisit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WS_DelCompany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WS_DelCompany)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WS_Settings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WS_Settings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T2rT_RecordChecklist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T2rT_RecordChecklist)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T2rT_EditChecklist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T2rT_EditChecklist)
+        </dd>
+
+    </dl>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Role_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-2">
+            <a href='@Url.Action("Index")' class="btn btn-default">
+                &laquo; <img src="~/Images/list.png" height="21" /> Vissza a listára
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href='@Url.Action("Edit", new { id = Model.Role_ID })' class="btn btn-default">
+                <img src="~/Images/edit.png" height="21" /> Szerkesztés &raquo;
+            </a>
+        </div>
+    </div>
+</div>

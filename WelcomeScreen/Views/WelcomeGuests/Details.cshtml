@@ -1,0 +1,49 @@
+﻿@model WelcomeScreen.Models.WelcomeGuest
+
+@{
+    ViewBag.Title = "Vendég adatai";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fullname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fullname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.Company)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rank)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rank.Rank)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-2">
+            <a href='@Url.Action("Index")' class="btn btn-default">
+                &laquo; <img src="~/Images/list.png" height="21" /> Vissza a listára
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href='@Url.Action("Edit", new { id = Model.Guest_ID })' class="btn btn-default">
+                <img src="~/Images/edit.png" height="21" /> Szerkesztés &raquo;
+            </a>
+        </div>
+    </div>
+</div>

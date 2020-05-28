@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WelcomeScreen.Models.WelcomeCompany>
+
+@{
+    ViewBag.Title = "Partnercégek";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a href='@Url.Action("Create")' class="btn btn-default">
+        <img src="~/Images/new.png" height="21" /> Új partnercég &raquo;
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Company)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company)
+        </td>
+        <td>
+            @*@Html.ActionLink("Szerkesztés", "Edit", new { id=item.Comp_ID }) |*@
+            <a href='@Url.Action("Edit", new { id = item.Comp_ID })'>
+                <img src='~/Images/edit.png' height="21" title="Szerkesztés"
+                     onmouseover='this.src="/Images/edit_aq.png"' onmouseout="this.src='/Images/edit.png'" />
+            </a>
+            @if (@ViewBag.role.WS_Settings)
+            {
+                @Html.Raw(" | ")
+                <a href='@Url.Action("Details", new { id = item.Comp_ID })'>
+                    <img src='~/Images/details.png' height="21" title="Részletek"
+                         onmouseover='this.src="/Images/details_aq.png"' onmouseout="this.src='/Images/details.png'" />
+                </a>
+            }
+            @if (@ViewBag.role.WS_DelCompany)
+            {
+                <span> | </span>
+                <a href='@Url.Action("Delete", new { id = item.Comp_ID })'>
+                    <img src='~/Images/delete.png' height="21" title="Törlés"
+                         onmouseover='this.src="/Images/delete_aq.png"' onmouseout="this.src='/Images/delete.png'" />
+                </a>
+            }
+        </td>
+    </tr>
+}
+
+</table>

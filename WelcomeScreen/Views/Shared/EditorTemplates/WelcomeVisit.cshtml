@@ -1,0 +1,48 @@
+﻿@model WelcomeScreen.Models.WelcomeVisit
+
+<div>
+    @Html.ActionLink("Vissza a listára", "Index")
+</div>
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#FromDate").datepicker({
+                dateFormat: "yy.mm.dd.",
+                prevText: "Előző hónap",
+                nextText: "Következő hónap",
+                dayNamesMin: ["V", "H", "K", "Sz", "Cs", "P", "Szo"],
+                monthNamesShort: ["Jan", "Feb", "Már", "Ápr", "Máj", "Jún", "Júl", "Aug", "Szep", "Okt", "Nov", "Dec"],
+                changeMonth: true,
+                changeYear: true,
+                //yearRange: "-10:+10",
+                minDate: new Date(Date.now() - 4 * 86400000) ,
+                maxDate: new Date(Date.now() + 458 * 86400000),
+                firstDay: 1,
+                showMonthAfterYear: true,
+                bottonText: "naNa"
+            });
+
+            $("#ToDate").datepicker({
+                dateFormat: "yy.mm.dd.",
+                prevText: "Előző hónap",
+                nextText: "Következő hónap",
+                dayNamesMin: ["V", "H", "K", "Sz", "Cs", "P", "Szo"],
+                monthNamesShort: ["Jan", "Feb", "Már", "Ápr", "Máj", "Jún", "Júl", "Aug", "Szep", "Okt", "Nov", "Dec"],
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(),
+                maxDate: new Date(Date.now() + 458 * 86400000),
+                firstDay: 1,
+                showMonthAfterYear: true,
+                bottonText: "naNa"
+            });
+
+
+        });
+    </script>
+}

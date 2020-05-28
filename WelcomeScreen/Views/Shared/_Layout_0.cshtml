@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Intranet</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Főoldal", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Üdvözlő képernyő", "Index", "WelcomeVisits")</li>
+                    <li>@Html.ActionLink("Újabb fejlesztés", "Index", "WelcomeVisits")</li>
+                    @if (@ViewBag.role.Admin)
+                    {
+                        <li>@Html.ActionLink("Admin", "Index", "IntraRoles")</li>
+                    }
+                </ul>
+                <p class="nav navbar-text navbar-right">Szia @ViewBag.role.UserName!  </p>
+                @*<p class="nav navbar-text navbar-right">Hello @User.Identity.Name!, @User.Identity.AuthenticationType, @User.IsInRole("Informatikai vezető") </p>*@
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2019 - AQ Anton Kft.</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,92 @@
+﻿@model WelcomeScreen.Models.IntraRole
+
+@{
+    ViewBag.Title = "Felhasználói csoport törlése";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Biztosan szeretnéd törölni?</h3>
+<div class="form-horizontal">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Admin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsefullLimks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UsefullLimks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WS_ViewVisit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WS_ViewVisit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WS_CreateVisit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WS_CreateVisit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WS_DelCompany)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WS_DelCompany)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WS_Settings)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WS_Settings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T2rT_RecordChecklist)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.T2rT_RecordChecklist)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T2rT_EditChecklist)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.T2rT_EditChecklist)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <a href='@Url.Action("Index")' class="btn btn-default">
+                    &laquo; <img src="~/Images/list.png" height="21" /> Vissza a listára
+                </a>
+            </div>
+            <div class="col-md-10">
+                <input type="submit" value="Törlés" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,38 @@
+﻿@model WelcomeScreen.Models.WelcomeCompany
+
+@{
+    ViewBag.Title = "Partnercég törlése";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h4>Biztosan szeretnéd törölni?</h4>
+<div class="form-horizontal">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <a href='@Url.Action("Index")' class="btn btn-default">
+                    &laquo; <img src="~/Images/list.png" height="21" /> Vissza a listára
+                </a>
+            </div>
+            <div class="col-md-10">
+                <input type="submit" value="Törlés" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</div>

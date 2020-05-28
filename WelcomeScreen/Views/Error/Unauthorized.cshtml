@@ -1,0 +1,25 @@
+﻿@model WelcomeScreen.Models.IntraRole
+
+@{
+    ViewBag.Title = "Jogosultság hiány!";
+    Layout = null;
+    Layout = "~/Views/Shared/Error.cshtml";
+}
+
+<div class="panel panel-danger" style="color:firebrick;text-align:center">
+    <h1>Access unauthorized</h1>
+    <h1>@ViewBag.Title</h1>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <div class="danger">
+            <h3 class="text-warning">Kedves @Model.UserName (@Model.Role)!</h3>
+            <h4 class="text-warning">Nem vagy jogosult a kért tartalom megtekintésére.</h4>
+            <h4 class="text-warning">Szükség esetén kérj hozzáférést az informatikai csoporttól.</h4>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <img src="~/Images/Ali_Unauthorized.png" title="Muhammad Ali with unauthorized sign - designed by Vizsy István in 2019"
+             height="553" />
+    </div>
+</div>

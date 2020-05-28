@@ -1,0 +1,146 @@
+﻿@model WelcomeScreen.Models.WelcomeGuestVisit
+
+@{
+    /**/
+
+    ViewBag.Title = "Vendéglista szerkesztése";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Visit.Visit)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Visit.Visit)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Visit.Company)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Visit.Company.Company)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Visit.Period)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Visit.Period)
+    </dd>
+
+</dl>
+
+@if (Model.hasguest)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Visit_ID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Guest, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Sel_Guest_ID
+                        , Model.AssignableGuests, "- Válassz új résztvevőt -"
+                        , new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Guest, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <a href='@Url.Action("Index")' class="btn btn-default">
+                        &laquo; <img src="~/Images/list.png" height="21" /> Vissza a listára
+                    </a>
+                </div>
+                <div class="col-md-10">
+                    <input type="submit" value="Hozzáadás" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Guest)
+        </dt>
+        <dd>
+            @Html.Label("Nincs több kiválasztható vendég a partnercégtől!", new { @class = "text-info" })
+        </dd>
+
+
+
+    </dl>
+
+    <div class="form-group">
+        <p>
+            <a href='@Url.Action("Index")' class="btn btn-default">
+                &laquo; <img src="~/Images/list.png" height="21" /> Vissza a listára
+            </a>
+        </p>
+    </div>
+
+}
+
+<hr>
+<h3>A látogatás résztvevői az üdvözlő képernyőn megjelenő sorrendben</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Visit.GuestVisits[0].Guest.Fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Visit.GuestVisits[0].Guest.Company.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Visit.GuestVisits[0].Guest.RankOrDel)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var gv in Model.Visit.GuestVisits)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => gv.Guest.Fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => gv.Guest.Company.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => gv.Guest.RankOrDel)
+            </td>
+            <td>
+                @if (Model.hasguest)
+                {
+                    @*@Html.ActionLink("Módosítás", "GuestEdit", new { id = gv.GV_ID })*@
+                    <a href='@Url.Action("GuestEdit", new { id = gv.GV_ID })'>
+                        <img src='~/Images/edit.png' height="21" title="Módosítás"
+                             onmouseover='this.src="/Images/edit_aq.png"' onmouseout="this.src='/Images/edit.png'" />
+                    </a>
+                    @Html.Raw(" | ")
+                }
+                @*@Html.ActionLink("Eltávolítás", "GuestDel", new { id = gv.GV_ID })*@
+                <a href='@Url.Action("GuestDel", new { id = gv.GV_ID })'>
+                    <img src='~/Images/delete.png' height="21" title="Eltávolítás"
+                         onmouseover='this.src="/Images/delete_aq.png"' onmouseout="this.src='/Images/delete.png'" />
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

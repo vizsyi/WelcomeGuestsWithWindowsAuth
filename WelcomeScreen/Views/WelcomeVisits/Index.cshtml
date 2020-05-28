@@ -1,0 +1,93 @@
+﻿@model IEnumerable<WelcomeScreen.Models.WelcomeVisit>
+
+@{
+    ViewBag.Title = "Látogatások";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @if (@ViewBag.role.WS_CreateVisit)
+    {
+        <a href='@Url.Action("Create")' class="btn btn-default">
+            <img src="~/Images/new.png" height="21" /> Új látogatás &raquo;
+        </a>
+    }
+</p>
+
+<table class="table">
+    <tr>
+        <th colspan="2">
+            @Html.DisplayNameFor(model => model.Visit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Period)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var visit in Model)
+    {
+        <tr>
+            <td colspan="2">
+                @Html.DisplayFor(modelvisit => visit.Visit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelvisit => visit.Period)
+                @if (visit.recent)
+                {
+                    <span class="blink">* Most *</span>
+                }
+            </td>
+            <td>
+                @*@Html.ActionLink("Vendéglista szerk.", "GuestCreate", new { id = visit.Visit_ID }) |*@
+                @if (@ViewBag.role.WS_CreateVisit)
+                {
+                    <a href='@Url.Action("GuestCreate", new { id = visit.Visit_ID })'>
+                        <img src='~/Images/guests.png' height="21" title="Vendéglista szerkesztése"
+                             onmouseover='this.src="/Images/guests_aq.png"' onmouseout="this.src='/Images/guests.png'" />
+                        (vendéglista szerk.)
+                    </a>
+                    @Html.Raw(" | ")
+                    @*@Html.ActionLink("Szerkesztés", "Edit", new { id = visit.Visit_ID });*@
+                    <a href='@Url.Action("Edit", new { id = visit.Visit_ID })'>
+                        <img src='~/Images/edit.png' height="21" title="Szerkesztés"
+                             onmouseover='this.src="/Images/edit_aq.png"' onmouseout="this.src='/Images/edit.png'" />
+                    </a>
+                    @Html.Raw(" | ")
+                }
+                <a href='@Url.Action("Details", new { id = visit.Visit_ID })'>
+                    <img src='~/Images/details.png' height="21" title="Részletek"
+                         onmouseover='this.src="/Images/details_aq.png"' onmouseout="this.src='/Images/details.png'" />
+                </a>
+                @*@Html.ActionLink("Részletek", "Details", new { id = visit.Visit_ID })*@
+                @if (@ViewBag.role.WS_CreateVisit)
+                {
+                    <span> | </span>
+                    @*@Html.ActionLink("Törlés", "Delete", new { id = visit.Visit_ID })*@
+                    <a href='@Url.Action("Delete", new { id = visit.Visit_ID })'>
+                        <img src='~/Images/delete.png' height="21" title="Törlés"
+                             onmouseover='this.src="/Images/delete_aq.png"' onmouseout="this.src='/Images/delete.png'" />
+                    </a>
+                }
+            </td>
+        </tr>
+        foreach (var gv in visit.GuestVisits)
+        {
+            <tr class="media">
+                <td></td>
+                <td>
+                    @Html.DisplayFor(modelvisit => gv.Guest.Fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelvisit => gv.Guest.Company.CompShow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelvisit => gv.Guest.RankOrDel)
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+<link href="~/Content/Blinking.css" rel="stylesheet" />

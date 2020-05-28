@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WelcomeScreen.Models.WelcomeCompany>
+
+@{
+    ViewBag.Title = "Vendégek";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a href='@Url.Action("Create")' class="btn btn-default">
+        <img src="~/Images/new.png" height="21" /> Új vendég &raquo;
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Guests[0].Fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Guests[0].Rank)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var comp in Model)
+    {
+        <tr>
+            <td colspan="4" class="modal-header">@comp.Company</td>
+        </tr>
+        foreach (var guest in comp.Guests)
+        {
+            if (!guest.Deleted)
+            {
+        <tr>
+            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => guest.Fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => guest.Rank.Rank)
+            </td>
+            <td>
+                @*@Html.ActionLink("Szerkesztés", "Edit", new { id = guest.Guest_ID }) |
+                @Html.ActionLink("Részletek", "Details", new { id = guest.Guest_ID }) |
+                @Html.ActionLink("Törlés", "Delete", new { id = guest.Guest_ID })*@
+                <a href='@Url.Action("Edit", new { id = guest.Guest_ID })'>
+                    <img src='~/Images/edit.png' height="21" title="Szerkesztés"
+                         onmouseover='this.src="/Images/edit_aq.png"' onmouseout="this.src='/Images/edit.png'" />
+                </a>
+                @Html.Raw(" | ")
+                <a href='@Url.Action("Details", new { id = guest.Guest_ID })'>
+                    <img src='~/Images/details.png' height="21" title="Részletek"
+                         onmouseover='this.src="/Images/details_aq.png"' onmouseout="this.src='/Images/details.png'" />
+                </a>
+                <span> | </span>
+                <a href='@Url.Action("Delete", new { id = guest.Guest_ID })'>
+                    <img src='~/Images/delete.png' height="21" title="Törlés"
+                         onmouseover='this.src="/Images/delete_aq.png"' onmouseout="this.src='/Images/delete.png'" />
+                </a>
+            </td>
+        </tr>
+            }
+        }
+    }
+
+</table>

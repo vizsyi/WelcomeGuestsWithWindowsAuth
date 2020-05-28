@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WelcomeScreen.Models.WelcomeGuest>
+
+@{
+    ViewBag.Title = "Vendégeink";
+}
+
+@if (Model.Count() == 0)
+{
+    <h2>Az Üdvözlő képernyőn most nem jelenik meg vendég.</h2>
+}
+else
+{
+    if (Model.Count() == 1)
+    {
+        <h2>Az Üdvözlőképernyőn most megjelenő vendég:</h2>
+    }
+    else
+    {
+        <h2>Az Üdvözlőképernyőn most megjelenő vendégek:</h2>
+        <h4>(A képernyőn megjelenő sorrendben)</h4>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Fullname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Company)
+            </th>
+        </tr>
+
+        @foreach (var guest in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => guest.Fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => guest.Company.CompShow)
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+
+    <p>
+        @Html.ActionLink("Tovább a látogatások listájára", "IndexK")
+    </p>
+
+

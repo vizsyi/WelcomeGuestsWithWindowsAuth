@@ -1,0 +1,81 @@
+﻿@model WelcomeScreen.Models.WelcomeVisit
+
+@{
+    ViewBag.Title = "Látogatás részletes adatai";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Visit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Visit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.Company)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Period)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Period)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (@ViewBag.role.WS_CreateVisit)
+    {
+        @Html.ActionLink("Szerkesztés", "Edit", new { id = Model.Visit_ID })
+        @Html.Raw(" |")
+    }
+    @Html.ActionLink("Vissza a listára", "Index")
+</p>
+
+<hr>
+<h3>A látogatás résztvevői az üdvözlő képernyőn megjelenő sorrendben:</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestVisits[0].Guest.Fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestVisits[0].Guest.Company.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestVisits[0].Guest.RankOrDel)
+        </th>
+    </tr>
+
+    @foreach (var gv in Model.GuestVisits)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => gv.Guest.Fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => gv.Guest.Company.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => gv.Guest.RankOrDel)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@if (@ViewBag.role.WS_CreateVisit)
+{
+    <p>
+        @Html.ActionLink("Vendéglista szerkesztése", "GuestCreate", new { id = Model.Visit_ID })
+    </p>
+}

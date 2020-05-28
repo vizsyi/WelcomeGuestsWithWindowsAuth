@@ -1,0 +1,111 @@
+﻿@model WelcomeScreen.Models.WelcomeRank
+
+@{
+    ViewBag.Title = "Pozíció törlése";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h4>Biztosan szeretnéd törölni?</h4>
+<div class="form-horizontal">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Rank)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rank)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Importance)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Importance)
+        </dd>
+    </dl>
+
+    @if (Model.guests.Count() == 0)
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <a href='@Url.Action("Index")' class="btn btn-default">
+                        &laquo; <img src="~/Images/list.png" height="21" /> Vissza a listára
+                    </a>
+                </div>
+                <div class="col-md-10">
+                    <input type="submit" value="Törlés" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div>
+            @Html.Label("A pozíció vendég adatkapcsolat miatt nem törölhető!", new { @class = "text-warning" })
+        </div>
+        <div>
+            @Html.Label("Előbb módosítani kell a kapcsolodó vendégek pozícióját!", new { @class = "text-warning" })
+        </div>
+        <p>
+            <a href='@Url.Action("Index")' class="btn btn-default">
+                &laquo; <img src="~/Images/list.png" height="21" /> Vissza a listára
+            </a>
+        </p>
+    }
+
+</div>
+
+@if (Model.guests.Count() > 0)
+{
+    <hr>
+    if (Model.guests.Count() == 1)
+    {
+        <h3>Ezzel a pozícióval rendelkező vendég:</h3>
+    }
+    else
+    {
+        <h3>Ezzel a pozícióval rendelkező vendégek:</h3>
+    }
+
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.guests[0].Fullname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.guests[0].Company.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.guests[0].Deleted)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var guest in Model.guests)
+        {
+            <tr>
+                <td></td>
+                <td>
+                    @Html.DisplayFor(modelItem => guest.Fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => guest.Company.Company)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => guest.Deleted)
+                </td>
+                <td>
+                    <a href='@Url.Action("GREdit", new { id = guest.Guest_ID })'>
+                        <img src='~/Images/edit.png' height="21" title="Módosítás"
+                             onmouseover='this.src="/Images/edit_aq.png"' onmouseout="this.src='/Images/edit.png'" />
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+}
